@@ -57,7 +57,9 @@ class DownloadManager(QObject):
         self.nooverwrites = False if int(self.main_window.settings.value('overwrite')) == 2 else True
         self.writesubtitles = True if int(self.main_window.settings.value('writesubtitles')) == 2 else False
         self.writeautomaticsub = True if int(self.main_window.settings.value('writeautomaticsub')) == 2 else False
-        self.subtitleslangs = self.main_window.settings.value('subtitleslangs').split(' ')
+        self.subtitleslangs = self.main_window.settings.value('subtitleslangs')
+        if type(self.subtitleslangs) == str:
+            self.subtitleslangs = self.subtitleslangs.split(', ')
         if 'zh' in self.subtitleslangs:
             self.subtitleslangs.append('zh-Hans')
             self.subtitleslangs.append('zh-Hant')

@@ -52,6 +52,8 @@ convertFormats=2
             elif eval('self.' + k + '.__class__') == QComboBox:
                 eval('self.' + k + '.setCurrentText(val)')
             elif eval('self.' + k + '.__class__') == QPlainTextEdit:
+                if type(val) == list:
+                    val = ', '.join(val)
                 eval('self.' + k + '.setPlainText(val)')
             elif eval('self.' + k + '.__class__') == QSpinBox:
                 val = int(val)
