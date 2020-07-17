@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineSettings
 
 import os
+import sys
 from urllib.parse import urlparse
 
 

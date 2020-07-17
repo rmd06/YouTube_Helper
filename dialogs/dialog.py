@@ -24,7 +24,11 @@ convertFormats=2
 
     def __init__(self, parent):
         super().__init__(parent)
-        loadUi(os.path.join(os.path.abspath('.'), 'dialogs/Preferences.ui'), self)
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'dialogs/Preferences.ui')
+        else:
+            datadir = 'dialogs/Preferences.ui'
+        loadUi(datadir, self)
         self.init_settings()
         self.directoryBtn.clicked.connect(self.change_directory)
         self.saveSettingsBtn.clicked.connect(self.saveSettings)
@@ -95,7 +99,11 @@ convertFormats=2
 class DocumentationDialog(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi(os.path.join(os.path.abspath('.'), 'dialogs/Documentation.ui'), self)
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'dialogs/Documentation.ui')
+        else:
+            datadir = 'dialogs/Documentation.ui'
+        loadUi(datadir, self)
         self.webEngineView.setPage(WebEnginePage(self.webEngineView))
         self.webEngineView.setUrl(QUrl('file:///../assets/Documentation.html'))
 
@@ -107,8 +115,11 @@ class DocumentationDialog(QDialog):
 class AboutDialog(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi(os.path.join(os.path.abspath('.'), 'dialogs/About.ui'), self)
-
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'dialogs/About.ui')
+        else:
+            datadir = 'dialogs/About.ui'
+        loadUi(datadir, self)
     def show_dialog(self):
         self.show()
         self.exec_()
@@ -117,5 +128,9 @@ class AboutDialog(QDialog):
 class ErrorDialog(QDialog):
     def __init__(self, error_msg):
         super().__init__()
-        loadUi(os.path.join(os.path.abspath('.'), 'dialogs/Error.ui'), self)
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'dialogs/Error.ui')
+        else:
+            datadir = 'dialogs/Error.ui'
+        loadUi(datadir, self)
         self.error_box.setText(error_msg)

@@ -6,7 +6,7 @@ class SearchTab(QWidget):
     display_name = 'Search'
 
     def __init__(self, main_window):
-        super().__init__()
+        super().__init__(main_window)
         QThread.currentThread().setObjectName('search_tab')
         self.main_window = main_window
         self.main_window.search_tab = self
@@ -15,7 +15,11 @@ class SearchTab(QWidget):
         self.show()
 
     def init_ui(self):
-        loadUi(os.path.join(os.path.abspath('.'), 'tabs/search.ui'), self)
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'tabs/search.ui')
+        else:
+            datadir = 'tabs/search.ui'
+        loadUi(datadir, self)
         self.webEngineView.setPage(WebEnginePage(self.webEngineView))
         self.query.returnPressed.connect(self.search)
         self.searchBtn.clicked.connect(self.search)

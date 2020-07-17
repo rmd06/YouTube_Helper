@@ -205,7 +205,11 @@ class DownloadTab(QWidget):
         self.show()
 
     def init_ui(self):
-        loadUi(os.path.join(os.path.abspath('.'), 'tabs/download.ui'), self)
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'tabs/download.ui')
+        else:
+            datadir = 'tabs/download.ui'
+        loadUi(datadir, self)
         self.webEngineView.setPage(WebEnginePage(self.webEngineView))
         self.webEngineView.settings().setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
         self.page = self.webEngineView.page()

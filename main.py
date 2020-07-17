@@ -19,7 +19,11 @@ class YouTubeHelper(QMainWindow):
         self.showMaximized()
 
     def init_ui(self):
-        loadUi(os.path.join(os.path.abspath('.'), 'Main.ui'), self)
+        if hasattr(sys, "_MEIPASS"):
+            datadir = os.path.join(sys._MEIPASS, 'Main.ui')
+        else:
+            datadir = 'Main.ui'
+        loadUi(datadir, self)
         self.init_menu()
         self.init_tabs()
         self.allVideos = AllVideos(self, self.allVideosBox)
@@ -53,7 +57,7 @@ class YouTubeHelper(QMainWindow):
             # Create an API object with the API key
             self.API = API(self, api_key=api_key)
         except:
-            self.main_window.sig_error.emit('No API Key loaded \n Search results will be limited to one.')
+            self.sig_error.emit('No API Key loaded \n Search results will be limited to one.')
             self.API = API(self)
 
     def resizeEvent(self, event):
