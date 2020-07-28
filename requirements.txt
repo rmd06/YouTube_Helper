@@ -1,4 +1,4 @@
 PyQt5==5.15.0
 PyQtWebEngine==5.15.0
-youtube_dl==2020.6.16.1
+youtube_dl>=2020.6.16.1
 google_api_python_client==1.8.0
